@@ -1,0 +1,16 @@
+.DS_Store
+
+# node.js
+#
+npm-debug.log
+yarn-error.log
+
+# Bundle artifact
+*.jsbundle
+
+#editors
+.vscode
+
+node_modules
+.env
+rest.http
