@@ -8,6 +8,7 @@ router.get("", async (req, res, next) => {
     res.send("API is running...");
 });
 
-//get most favourite teacher
+//route to get most favourite teacher
 router.get("/mostFavourite", mostFavourite);
+
 module.exports = router;

@@ -84,5 +84,18 @@ const registerTeacher = asyncHandler(async (req, res, next) => {
   }
 });
 
+const getTeacher = asyncHandler(async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const teacher = await Teacher.findById(id);
+
+    //return the teacher respone object
+    res.status(200).json({...teacher, password: undefined});
+
+  } catch (error) {
+    next(error);
+  }
+})
   
-module.exports = { loginTeacher, registerTeacher };
+module.exports = { loginTeacher, registerTeacher, getTeacher };

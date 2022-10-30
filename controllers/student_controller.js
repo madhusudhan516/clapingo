@@ -28,7 +28,7 @@ const loginStudent = asyncHandler(async (req, res, next) => {
       
       
       //If the user does not exist or the passwords don't match then throw an error
-      if (user.length < 1 || !(await bcrypt.compare(password, user.password))) {
+      if (!user || !(await bcrypt.compare(password, user.password))) {
         throw createError.Unauthorized(`Incorrect email or password`);
       }
   
@@ -113,11 +113,13 @@ const addToFavourites = asyncHandler(async (req, res, next) => {
         const student_id = req.payload.aud;
 
         const favouriteList = {student_id: student_id, teacher_id: teacher_id};
+        console.log(favouriteList);
 
         //check whether teacher is already added to favourites or not
-        const teacher = await Favourite.findOne({ teacher_id: teacher_id });
+        const teacher = await Favourite.findOne({ student_id: student_id, teacher_id: teacher_id });
 
         if (!teacher) {
+            console.log("created");
             await Favourite.create({ student_id: student_id, teacher_id: teacher_id});
         }
 
